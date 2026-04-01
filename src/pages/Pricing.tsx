@@ -32,8 +32,7 @@ const pricingPlans = [
       "All modules included",
       "Unlimited users",
       "Priority support",
-      "Regular updates",
-      "Data backup"
+      "Regular updates"
     ]
   },
   {
@@ -49,9 +48,7 @@ const pricingPlans = [
       "All modules included",
       "Unlimited users",
       "Premium support",
-      "Advanced analytics",
-      "Data backup & export",
-      "Custom integrations"
+      "Priority feature requests"
     ]
   },
   {
@@ -67,11 +64,7 @@ const pricingPlans = [
       "All modules included",
       "Unlimited users",
       "24/7 Premium support",
-      "Advanced analytics",
-      "Priority feature requests",
-      "Data backup & export",
-      "Custom integrations",
-      "Dedicated account manager"
+      "Priority feature requests"
     ]
   }
 ];
@@ -130,7 +123,7 @@ const Pricing = () => {
             {pricingPlans.map((plan, index) => (
               <div
                 key={plan.id}
-                className={`relative rounded-2xl border p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 opacity-0 animate-fade-in ${
+                className={`relative rounded-2xl border p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 opacity-0 animate-fade-in flex flex-col h-full ${
                   plan.popular
                     ? "border-primary bg-card shadow-xl shadow-primary/20 scale-105"
                     : "border-border bg-card/80 hover:border-primary/50"
@@ -168,10 +161,10 @@ const Pricing = () => {
                 </div>
 
                 {/* Features */}
-                <div className="py-6 space-y-3">
+                <div className="py-6 space-y-3 flex-grow">
                   {plan.features.map((feature, idx) => (
                     <div key={idx} className="flex items-start gap-3">
-                      <div className="rounded-full bg-primary/10 p-1 mt-0.5">
+                      <div className="rounded-full bg-primary/10 p-1 mt-0.5 flex-shrink-0">
                         <Check className="h-3 w-3 text-primary" />
                       </div>
                       <span className="text-sm text-foreground">{feature}</span>
@@ -181,7 +174,7 @@ const Pricing = () => {
 
                 {/* CTA Button */}
                 <Button
-                  className={`w-full transition-all duration-200 ${
+                  className={`w-full transition-all duration-200 mt-auto ${
                     plan.popular
                       ? "bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/30"
                       : "bg-secondary text-secondary-foreground hover:bg-primary hover:text-primary-foreground"

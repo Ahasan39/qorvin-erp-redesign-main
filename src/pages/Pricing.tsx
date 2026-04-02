@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Check, Sparkles } from "lucide-react";
-import qorvinLogo from "@/assets/qorvin-logo.png";
+import Navbar from "@/components/Navbar";
+import { getWhatsAppLink, whatsAppMessages } from "@/lib/whatsapp";
 
 const pricingPlans = [
   {
@@ -12,6 +13,7 @@ const pricingPlans = [
     amount: 0,
     popular: false,
     description: "Try all features free for 15 days",
+    whatsappMessage: whatsAppMessages.pricing.trial,
     features: [
       "Access to all modules",
       "Full feature access",
@@ -28,6 +30,7 @@ const pricingPlans = [
     amount: 600,
     popular: false,
     description: "Perfect for getting started",
+    whatsappMessage: whatsAppMessages.pricing.monthly,
     features: [
       "All modules included",
       "Unlimited users",
@@ -44,6 +47,7 @@ const pricingPlans = [
     popular: true,
     description: "Best value for growing businesses",
     savings: "Save ৳600",
+    whatsappMessage: whatsAppMessages.pricing.halfYearly,
     features: [
       "All modules included",
       "Unlimited users",
@@ -60,6 +64,7 @@ const pricingPlans = [
     popular: false,
     description: "Maximum savings for established businesses",
     savings: "Save ৳2,200",
+    whatsappMessage: whatsAppMessages.pricing.yearly,
     features: [
       "All modules included",
       "Unlimited users",
@@ -72,54 +77,23 @@ const pricingPlans = [
 const Pricing = () => {
   return (
     <div className="flex min-h-screen flex-col bg-background" style={{ backgroundImage: "var(--gradient-bg)" }}>
-      {/* Header */}
-      <header className="flex items-center justify-between px-4 py-3 sm:px-6 sm:py-4 lg:px-12">
-        <div className="flex items-center gap-8">
-          <Link to="/" className="flex items-center gap-2">
-            <img src={qorvinLogo} alt="Qorvin" className="h-8 sm:h-10 w-auto" />
-          </Link>
-          
-          <nav className="hidden md:flex items-center gap-6">
-            <Link to="/about" className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
-              About
-            </Link>
-            <Link to="/solutions" className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
-              Solutions
-            </Link>
-            <Link to="/pricing" className="text-sm font-medium text-primary">
-              Pricing
-            </Link>
-            <Link to="/resources" className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
-              Resources
-            </Link>
-          </nav>
-        </div>
-
-        <div className="flex gap-2 sm:gap-3">
-          <Link to="/" className="rounded-lg border border-primary/30 px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm font-medium text-primary transition hover:bg-primary/10">
-            Sign In
-          </Link>
-          <Link to="/sign-up" className="rounded-lg bg-primary px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm font-medium text-primary-foreground transition hover:bg-primary/90">
-            Sign Up
-          </Link>
-        </div>
-      </header>
+      <Navbar />
 
       {/* Main Content */}
-      <main className="flex-1 px-4 py-8 sm:px-6 lg:px-12">
-        <div className="mx-auto max-w-7xl space-y-12">
+      <main className="flex-1 px-4 py-12 sm:px-6 sm:py-16 lg:px-12">
+        <div className="mx-auto max-w-7xl space-y-16">
           {/* Hero Section */}
           <div className="text-center space-y-4 animate-fade-in">
             <h1 className="text-4xl font-bold text-foreground sm:text-5xl lg:text-6xl">
               Simple, Transparent <span className="text-primary">Pricing</span>
             </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto">
               Choose the perfect plan for your business. Start with a free trial and scale as you grow.
             </p>
           </div>
 
           {/* Pricing Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {pricingPlans.map((plan, index) => (
               <div
                 key={plan.id}
@@ -174,6 +148,7 @@ const Pricing = () => {
 
                 {/* CTA Button */}
                 <Button
+                  asChild
                   className={`w-full transition-all duration-200 mt-auto ${
                     plan.popular
                       ? "bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/30"
@@ -181,7 +156,13 @@ const Pricing = () => {
                   }`}
                   size="lg"
                 >
-                  {plan.amount === 0 ? "Start Free Trial" : "Get Started"}
+                  <a
+                    href={getWhatsAppLink(plan.whatsappMessage)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {plan.amount === 0 ? "Start Free Trial" : "Get Started"}
+                  </a>
                 </Button>
               </div>
             ))}
@@ -189,19 +170,19 @@ const Pricing = () => {
 
           {/* Additional Info */}
           <div className="text-center space-y-4 pt-8 opacity-0 animate-fade-in" style={{ animationDelay: "500ms", animationFillMode: "forwards" }}>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm sm:text-base text-muted-foreground max-w-3xl mx-auto">
               All plans include access to our complete ERP suite with modules for Inventory, HR & Payroll, Accounting, CRM, and more.
             </p>
-            <p className="text-sm text-muted-foreground">
-              Need a custom plan? <Link to="/contact" className="text-primary font-medium hover:underline">Contact our sales team</Link>
+            <p className="text-sm sm:text-base text-muted-foreground">
+              Need a custom plan? <a href={getWhatsAppLink(whatsAppMessages.contact.sales)} target="_blank" rel="noopener noreferrer" className="text-primary font-medium hover:underline">Contact our sales team</a>
             </p>
           </div>
         </div>
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-border px-6 py-8 mt-auto">
-        <div className="mx-auto max-w-6xl text-center text-sm text-muted-foreground">
+      <footer className="border-t border-border px-4 py-8 sm:px-6 lg:px-12 mt-auto">
+        <div className="mx-auto max-w-7xl text-center text-sm text-muted-foreground">
           <p>© 2024 Qorvin It Limited. All rights reserved.</p>
         </div>
       </footer>

@@ -11,7 +11,7 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import ModuleCard from "@/components/ModuleCard";
-import qorvinLogo from "@/assets/qorvin-logo.png";
+import Navbar from "@/components/Navbar";
 
 const modules = [
   { icon: Package, label: "Inventory" },
@@ -58,54 +58,24 @@ const SignUp = () => {
 
   return (
     <div className="flex min-h-screen flex-col bg-background" style={{ backgroundImage: "var(--gradient-bg)" }}>
-      <header className="flex items-center justify-between px-4 py-3 sm:px-6 sm:py-4 lg:px-12">
-        <div className="flex items-center gap-8">
-          <Link to="/" className="flex items-center gap-2">
-            <img src={qorvinLogo} alt="Qorvin" className="h-8 sm:h-10 w-auto" />
-          </Link>
-          
-          <nav className="hidden md:flex items-center gap-6">
-            <Link to="/about" className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
-              About
-            </Link>
-            <Link to="/solutions" className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
-              Solutions
-            </Link>
-            <Link to="/pricing" className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
-              Pricing
-            </Link>
-            <Link to="/resources" className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
-              Resources
-            </Link>
-          </nav>
-        </div>
-
-        <div className="flex gap-2 sm:gap-3">
-          <Link to="/" className="rounded-lg border border-primary/30 px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm font-medium text-primary transition hover:bg-primary/10">
-            Sign In
-          </Link>
-          <Link to="/sign-up" className="rounded-lg bg-primary px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm font-medium text-primary-foreground transition hover:bg-primary/90">
-            Sign Up
-          </Link>
-        </div>
-      </header>
+      <Navbar />
 
       {/* Main Content */}
-      <main className="flex flex-1 px-4 py-6 sm:px-6 sm:py-8 lg:px-12 lg:items-center">
-        <div className="mx-auto grid w-full max-w-6xl gap-8 lg:grid-cols-2 lg:gap-16 items-start">
+      <main className="flex flex-1 px-4 py-8 sm:px-6 sm:py-12 lg:px-12 lg:items-center">
+        <div className="mx-auto grid w-full max-w-7xl gap-8 lg:grid-cols-2 lg:gap-12 items-start">
           {/* Left - Modules */}
-          <div className="space-y-4 sm:space-y-6 animate-fade-in">
-            <div>
-              <h1 className="text-2xl font-bold leading-tight text-foreground sm:text-3xl lg:text-4xl">
+          <div className="space-y-6 sm:space-y-8 animate-fade-in">
+            <div className="space-y-3">
+              <h1 className="text-3xl font-bold leading-tight text-foreground sm:text-4xl lg:text-5xl">
                 All-in-One Business
                 <span className="block text-primary">Software Solutions</span>
               </h1>
-              <p className="mt-2 text-sm text-muted-foreground sm:mt-3 sm:text-base">
+              <p className="mt-3 text-base text-muted-foreground sm:text-lg max-w-xl">
                 We provide all kinds of business software to streamline your operations.
               </p>
             </div>
 
-            <div className="grid grid-cols-4 gap-2 sm:gap-3">
+            <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 sm:gap-4">
               {modules.map((mod, i) => (
                 <ModuleCard key={mod.label} icon={mod.icon} label={mod.label} index={i} />
               ))}
@@ -189,8 +159,8 @@ const SignUp = () => {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-border px-6 py-6 lg:px-12">
-        <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 sm:flex-row sm:justify-between">
+      <footer className="border-t border-border px-4 py-8 sm:px-6 lg:px-12 mt-auto">
+        <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 sm:flex-row sm:justify-between">
           <div className="flex flex-col gap-1 text-sm text-muted-foreground sm:flex-row sm:gap-4">
             <span>Support: info@qorvinit.com</span>
             <span>Help Line: +8801842299275</span>

@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import qorvinLogo from "@/assets/qorvin-logo.png";
+import { getWhatsAppLink, whatsAppMessages } from "@/lib/whatsapp";
 
 interface NavLinkItem {
   label: string;
@@ -52,22 +53,22 @@ const Navbar = () => {
     <header
       className={cn(
         "sticky top-0 z-50 w-full transition-all duration-300",
-        isScrolled
+        isScrolled || isMobileMenuOpen
           ? "bg-background/95 backdrop-blur-md border-b border-border shadow-sm"
           : "bg-transparent"
       )}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-12">
-        <div className="flex items-center justify-between h-16 lg:h-20">
+        <div className="flex items-center justify-between h-14 sm:h-16 lg:h-20">
           {/* Logo */}
           <Link 
             to="/" 
-            className="flex items-center gap-2 transition-transform hover:scale-105 z-50"
+            className="flex items-center gap-2 transition-transform hover:scale-105 z-50 px-1"
           >
             <img 
               src={qorvinLogo} 
               alt="Qorvin" 
-              className="h-8 sm:h-10 lg:h-12 w-auto" 
+              className="h-7 sm:h-9 lg:h-12 w-auto" 
             />
           </Link>
 
@@ -136,7 +137,7 @@ const Navbar = () => {
               size="sm"
               className="border-primary/30 text-primary hover:bg-primary/10"
             >
-              <Link to="/">Sign In</Link>
+              <Link to="/sign-in">Sign In</Link>
             </Button>
             <Button
               asChild
@@ -147,48 +148,58 @@ const Navbar = () => {
             </Button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 text-muted-foreground hover:text-foreground transition-colors z-50"
-            aria-label="Toggle menu"
-          >
-            {isMobileMenuOpen ? (
-              <X className="h-6 w-6" />
-            ) : (
-              <Menu className="h-6 w-6" />
-            )}
-          </button>
+          {/* Mobile Actions Header */}
+          <div className="lg:hidden flex items-center gap-2 z-50">
+            <a 
+              href={getWhatsAppLink(whatsAppMessages.contact.support)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 text-primary hover:bg-primary/10 rounded-full transition-colors"
+            >
+              <Phone className="h-5 w-5" />
+            </a>
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="p-2 text-muted-foreground hover:text-foreground transition-colors"
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? (
+                <X className="h-6 w-6 text-primary" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Overlay */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden fixed inset-0 top-16 bg-background/98 backdrop-blur-md border-t border-border animate-in slide-in-from-top duration-300">
-          <div className="container mx-auto px-4 py-6 space-y-6 h-full overflow-y-auto">
-            {/* Mobile Navigation Links */}
+        <div className="lg:hidden fixed inset-0 top-[3.5rem] bg-background/98 backdrop-blur-md animate-in slide-in-from-right duration-300 z-40">
+          <div className="container mx-auto px-6 py-8 flex flex-col h-full overflow-y-auto pb-24">
+            <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">Quick Menu</p>
             <nav className="space-y-2">
               {navLinks.map((link) => (
                 <div key={link.label}>
                   <Link
                     to={link.href}
                     className={cn(
-                      "flex items-center justify-between px-4 py-3 rounded-lg text-base font-medium transition-colors",
+                      "flex items-center justify-between px-4 py-4 rounded-xl text-lg font-semibold transition-all active:scale-[0.98]",
                       isActivePath(link.href)
                         ? "bg-primary/10 text-primary"
-                        : "text-muted-foreground hover:bg-accent hover:text-foreground"
+                        : "text-foreground hover:bg-accent border border-transparent"
                     )}
                     onClick={(e) => {
-                      if (link.children) {
+                      if (link.children && activeDropdown !== link.label) {
                         e.preventDefault();
-                        setActiveDropdown(activeDropdown === link.label ? null : link.label);
+                        setActiveDropdown(link.label);
                       }
                     }}
                   >
                     {link.label}
                     {link.children && (
                       <ChevronDown className={cn(
-                        "h-4 w-4 transition-transform",
+                        "h-5 w-4 transition-transform",
                         activeDropdown === link.label && "rotate-180"
                       )} />
                     )}
@@ -196,12 +207,12 @@ const Navbar = () => {
 
                   {/* Mobile Dropdown */}
                   {link.children && activeDropdown === link.label && (
-                    <div className="ml-4 mt-2 space-y-1 border-l-2 border-primary/20 pl-4">
+                    <div className="ml-4 mt-2 space-y-2 border-l border-primary/20 pl-4 animate-in fade-in slide-in-from-left-2 duration-200">
                       {link.children.map((child) => (
                         <Link
                           key={child.href}
                           to={child.href}
-                          className="block px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                          className="block px-4 py-3 text-base text-muted-foreground hover:text-primary transition-colors border-b border-border last:border-0"
                         >
                           {child.label}
                         </Link>
@@ -212,23 +223,30 @@ const Navbar = () => {
               ))}
             </nav>
 
-            {/* Mobile Auth Buttons */}
-            <div className="flex flex-col gap-3 px-4 pt-6 border-t border-border">
-              <Button
-                asChild
-                variant="outline"
-                size="lg"
-                className="w-full border-primary/30 text-primary hover:bg-primary/10"
-              >
-                <Link to="/">Sign In</Link>
-              </Button>
-              <Button
-                asChild
-                size="lg"
-                className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
-              >
-                <Link to="/sign-up">Sign Up</Link>
-              </Button>
+            <div className="mt-8 space-y-4">
+              <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Account Actions</p>
+              <div className="grid grid-cols-2 gap-4">
+                <Button
+                  asChild
+                  variant="outline"
+                  size="lg"
+                  className="w-full rounded-xl border-primary/30 text-primary font-bold h-14"
+                >
+                  <Link to="/sign-in">Sign In</Link>
+                </Button>
+                <Button
+                  asChild
+                  size="lg"
+                  className="w-full rounded-xl bg-primary text-primary-foreground font-bold h-14 shadow-lg shadow-primary/20"
+                >
+                  <Link to="/sign-up">Sign Up</Link>
+                </Button>
+              </div>
+            </div>
+
+            <div className="mt-auto py-8 text-center space-y-2">
+              <p className="text-sm text-muted-foreground">Need immediate help?</p>
+              <a href="tel:+8801842299275" className="text-xl font-black text-primary hover:underline">+8801842299275</a>
             </div>
           </div>
         </div>

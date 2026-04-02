@@ -150,7 +150,7 @@ const SignUp = () => {
 
                 <p className="text-center text-sm text-muted-foreground">
                   Already have an account?{" "}
-                  <Link to="/" className="text-primary hover:underline">Sign In</Link>
+                  <Link to="/sign-in" className="text-primary hover:underline">Sign In</Link>
                 </p>
               </div>
             </div>
@@ -159,7 +159,7 @@ const SignUp = () => {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-border px-4 py-8 sm:px-6 lg:px-12 mt-auto">
+      <footer className="border-t border-border px-4 pt-8 pb-24 sm:pb-8 sm:px-6 lg:px-12 mt-auto">
         <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 sm:flex-row sm:justify-between">
           <div className="flex flex-col gap-1 text-sm text-muted-foreground sm:flex-row sm:gap-4">
             <span>Support: info@qorvinit.com</span>

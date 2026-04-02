@@ -118,7 +118,7 @@ const Index = () => {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="px-4 py-12 sm:px-6 sm:py-16 lg:px-12 lg:py-20">
+      <section className="px-4 pt-10 pb-5 sm:pt-12 sm:pb-6 lg:pt-16 lg:pb-8">
         <div className="mx-auto max-w-7xl">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left - Hero Content */}
@@ -177,7 +177,7 @@ const Index = () => {
 
 
       {/* Sign In Section */}
-      <section className="px-4 py-16 sm:px-6 sm:py-20 lg:px-12">
+      <section className="px-4 pt-5 pb-10 sm:pt-6 sm:pb-12 lg:pt-8 lg:pb-16">
         <div className="mx-auto max-w-7xl">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left - Benefits for Existing Users */}
@@ -233,8 +233,8 @@ const Index = () => {
       </section>
 
       {/* Features Section */}
-      <section className="px-4 py-16 sm:px-6 sm:py-20 lg:px-12 bg-card/20 backdrop-blur-sm">
-        <div className="mx-auto max-w-7xl space-y-12">
+      <section className="px-4 py-10 sm:py-16 bg-card/20 backdrop-blur-sm">
+        <div className="mx-auto max-w-7xl space-y-8">
           <div className="text-center space-y-4">
             <h2 className="text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl">
               Why Choose <span className="text-primary">Qorvin IT</span>?
@@ -263,11 +263,11 @@ const Index = () => {
       </section>
 
       {/* How It Works Section */}
-      <section className="px-4 py-16 sm:px-6 sm:py-20 lg:px-12 relative overflow-hidden">
+      <section className="px-4 py-10 sm:py-16 relative overflow-hidden">
         {/* Background Decorative Element */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] -z-10" />
         
-        <div className="mx-auto max-w-7xl space-y-12">
+        <div className="mx-auto max-w-7xl space-y-8">
           <div className="text-center space-y-4 animate-fade-in">
             <h2 className="text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl">
               Get Started in <span className="text-primary italic">3 Simple Steps</span>
@@ -313,8 +313,8 @@ const Index = () => {
       </section>
 
       {/* Testimonials Section */}
-      <section className="px-4 py-16 sm:px-6 sm:py-20 lg:px-12">
-        <div className="mx-auto max-w-7xl space-y-12">
+      <section className="px-4 py-10 sm:py-16">
+        <div className="mx-auto max-w-7xl space-y-8">
           <div className="text-center space-y-4">
             <h2 className="text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl">
               What Our <span className="text-primary">Clients Say</span>
@@ -353,7 +353,7 @@ const Index = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="px-4 py-16 sm:px-6 sm:py-20 lg:px-12">
+      <section className="px-4 py-10 sm:py-16">
         <div className="mx-auto max-w-7xl">
           <div className="bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20 rounded-2xl p-8 sm:p-12 md:p-16 text-center space-y-8">
             <div className="space-y-4">
@@ -399,7 +399,7 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-border px-4 py-8 sm:px-6 lg:px-12">
+      <footer className="border-t border-border px-4 pt-8 pb-24 sm:pb-8 sm:px-6 lg:px-12">
         <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 sm:flex-row sm:justify-between">
           <div className="flex flex-col gap-1 text-sm text-muted-foreground sm:flex-row sm:gap-4">
             <span>Support: info@qorvinit.com</span>

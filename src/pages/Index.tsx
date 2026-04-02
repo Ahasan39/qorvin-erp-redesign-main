@@ -2,7 +2,7 @@ import {
   Package, Users, Calculator, UserCheck, UtensilsCrossed, Hotel,
   Stethoscope, Pill, Monitor, GraduationCap, Truck, Building2,
   Facebook, Twitter, Instagram, Youtube, Linkedin, Mail,
-  CheckCircle2, Zap, Shield, Headphones, TrendingUp, Award, Clock, Star,
+  CheckCircle2, Zap, Shield, Headphones, Star,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -57,12 +57,6 @@ const features = [
   },
 ];
 
-const stats = [
-  { icon: Users, value: "500+", label: "Happy Clients" },
-  { icon: Award, value: "10+", label: "Years Experience" },
-  { icon: TrendingUp, value: "99%", label: "Success Rate" },
-  { icon: Building2, value: "12+", label: "Solutions" },
-];
 
 const testimonials = [
   {
@@ -181,26 +175,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="px-4 py-12 sm:px-6 lg:px-12 bg-card/30 backdrop-blur-sm">
-        <div className="mx-auto max-w-7xl">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-            {stats.map((stat, index) => (
-              <div
-                key={stat.label}
-                className="text-center space-y-3 opacity-0 animate-fade-in"
-                style={{ animationDelay: `${index * 100}ms`, animationFillMode: "forwards" }}
-              >
-                <div className="mx-auto w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-                  <stat.icon className="h-6 w-6 text-primary" />
-                </div>
-                <div className="text-3xl sm:text-4xl font-bold text-foreground">{stat.value}</div>
-                <div className="text-sm text-muted-foreground">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Sign In Section */}
       <section className="px-4 py-16 sm:px-6 sm:py-20 lg:px-12">
@@ -250,7 +224,7 @@ const Index = () => {
 
             {/* Right - Sign In Form */}
             <div className="opacity-0 animate-slide-in-right" style={{ animationDelay: "400ms", animationFillMode: "forwards" }}>
-              <div className="rounded-2xl border border-border bg-card/80 p-6 sm:p-8 backdrop-blur-sm shadow-xl hover:shadow-2xl transition-shadow duration-300">
+              <div className="rounded-2xl border border-slate-100 bg-white p-6 sm:p-10 shadow-xl shadow-slate-200/50 hover:shadow-2xl transition-all duration-500">
                 <SignInForm />
               </div>
             </div>
@@ -289,31 +263,48 @@ const Index = () => {
       </section>
 
       {/* How It Works Section */}
-      <section className="px-4 py-16 sm:px-6 sm:py-20 lg:px-12">
+      <section className="px-4 py-16 sm:px-6 sm:py-20 lg:px-12 relative overflow-hidden">
+        {/* Background Decorative Element */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] -z-10" />
+        
         <div className="mx-auto max-w-7xl space-y-12">
-          <div className="text-center space-y-4">
+          <div className="text-center space-y-4 animate-fade-in">
             <h2 className="text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl">
-              Get Started in <span className="text-primary">3 Simple Steps</span>
+              Get Started in <span className="text-primary italic">3 Simple Steps</span>
             </h2>
-            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
-              Start your journey to better business management today.
+            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              Start your journey to better business management today with our streamlined onboarding process.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid gap-6 md:grid-cols-3 md:gap-8">
             {howItWorks.map((item, index) => (
               <div
                 key={item.step}
-                className="relative bg-card/80 backdrop-blur-sm border border-border rounded-xl p-8 space-y-4 opacity-0 animate-fade-in"
-                style={{ animationDelay: `${index * 150}ms`, animationFillMode: "forwards" }}
+                className="group relative bg-card/60 backdrop-blur-md border border-border/50 rounded-2xl p-6 sm:p-8 flex flex-col items-start gap-5 hover:bg-card/80 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 opacity-0 animate-fade-in"
+                style={{ animationDelay: `${index * 200}ms`, animationFillMode: "forwards" }}
               >
-                <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-2xl font-bold text-primary-foreground">
-                  {item.step}
+                <div className="flex items-center gap-4 w-full">
+                  <div className="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 bg-primary rounded-xl flex items-center justify-center text-xl sm:text-2xl font-bold text-primary-foreground shadow-lg shadow-primary/25 transition-all duration-300 group-hover:scale-110">
+                    {item.step}
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-bold text-foreground">
+                    {item.title}
+                  </h3>
                 </div>
-                <h3 className="text-2xl font-bold text-foreground">{item.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{item.description}</p>
+                
+                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed pl-1">
+                  {item.description}
+                </p>
+
+                {/* Desktop Connector */}
                 {index < howItWorks.length - 1 && (
-                  <div className="hidden md:block absolute top-1/2 -right-4 w-8 h-0.5 bg-border" />
+                  <div className="hidden md:block absolute top-[44%] -right-4 w-8 h-px bg-gradient-to-r from-primary/40 to-transparent" />
+                )}
+                
+                {/* Mobile Connector */}
+                {index < howItWorks.length - 1 && (
+                  <div className="md:hidden absolute left-12 -bottom-6 w-px h-6 bg-gradient-to-b from-primary/40 to-transparent" />
                 )}
               </div>
             ))}
